@@ -9,3 +9,7 @@ export const persuadeEnemy = createAction(
   '[Enemy] Persuade Enemy',
   props<{ persuasion: number }>()
 );
+
+export const resetEnemy = createAction(
+  '[Enemy] Reset Enemy',
+);

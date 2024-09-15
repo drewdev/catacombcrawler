@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { damageEnemy, persuadeEnemy } from "../actions/enemy.actions";
+import { damageEnemy, persuadeEnemy, resetEnemy } from "../actions/enemy.actions";
 
 export interface EnemyState {
   name: string;
@@ -28,5 +28,10 @@ export const enemyReducer = createReducer(
   on(persuadeEnemy, (state, { persuasion }) => ({
     ...state,
     persuasion: Math.min(100, state.persuasion + persuasion),
+  })),
+  on(resetEnemy, (state) => ({
+    ...state,
+    ...initialEnemyState
+    ,
   }))
 );

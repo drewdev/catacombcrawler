@@ -1,14 +1,14 @@
 @if (enemy$ | async; as enemy) {
   <div class="enemy-stats" >
     <h3>Enemy Stats</h3>
+    <p>Health: {{ enemy.health }}/{{ enemy.maxHealth }}</p>
     <div class="health-bar">
       <div class="health" [style.width]="(enemy.health / enemy.maxHealth) * 100 + '%'"></div>
     </div>
+    <p>Persuasion: {{ enemy.persuasion }}%</p>
     <div class="persuasion-bar">
       <div class="persuasion" [style.width]="enemy.persuasion + '%'"></div>
     </div>
-    <p>Health: {{ enemy.health }}/{{ enemy.maxHealth }}</p>
-    <p>Persuasion: {{ enemy.persuasion }}%</p>
     <p>Attack: {{ enemy.attack }}</p>
     <p>Defense: {{ enemy.defense }}</p>
     <img src="/spooky-skeleton.gif" alt="Enemy GIF" class="enemy-gif" />

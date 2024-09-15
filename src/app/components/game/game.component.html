@@ -1,15 +1,18 @@
 <div class="game-container">
     <!-- Área central con narrativa y opciones -->
     <div class="game-story">
-      <h2>{{ message }}</h2>
+      <app-text-box [text]="message"></app-text-box>
+      <h2></h2>
       <div class="actions">
         <button (click)="onPersuade()">Persuade</button>
         <button (click)="onAttack()">Attack</button>
         <button (click)="onEscape()">Escape</button>
       </div>
+
+      <app-dice #dice></app-dice>
       @if (diceRoll !== null) {
         <div>
-          <p>You rolled a {{ diceRoll }}!</p>
+          Dice result: {{ diceRoll }}
         </div>
       }
     </div>

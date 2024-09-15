@@ -1,0 +1,31 @@
+<div class="game-container">
+    <!-- Área central con narrativa y opciones -->
+    <div class="game-story">
+      <h2>{{ message }}</h2>
+      <div class="actions">
+        <button (click)="onPersuade()">Persuade</button>
+        <button (click)="onAttack()">Attack</button>
+        <button (click)="onEscape()">Escape</button>
+      </div>
+      @if (diceRoll !== null) {
+        <div>
+          <p>You rolled a {{ diceRoll }}!</p>
+        </div>
+      }
+    </div>
+  <!-- Imagen de fondo para la mazmorra -->
+  <div class="dungeon-background">
+    <img src="/game.png" alt="Dungeon Background" class="dungeon-image" />
+  </div>
+
+  <!-- Componente del jugador -->
+  <app-player></app-player>
+
+  <!-- Componente del enemigo -->
+  <app-enemy></app-enemy>
+
+  <!-- Modal para elegir recompensa, visible cuando showModal es true -->
+  @if (showModal) {
+    <app-reward-modal (onRewardSelection)="handleRewardSelection($event)"></app-reward-modal>
+  }
+</div>

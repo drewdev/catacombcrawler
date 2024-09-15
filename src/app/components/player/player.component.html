@@ -1,0 +1,26 @@
+@if (player$ | async; as player) {
+  <div class="player-info">
+    <img src="/player/player.png" alt="Player Avatar" />
+    <div class="stats">
+      <h3>Your Stats</h3>
+      <div class="health-bar">
+        <div class="health" [style.width]="player.health + '%'"></div>
+      </div>
+      <p>Health: {{ player.health }}/100</p>
+      <p>Attack: {{ player.attack }}</p>
+      <p>Defense: {{ player.defense }}</p>
+    </div>
+    <div class="inventory">
+      <h3>Inventory</h3>
+      <p>
+        <img [src]="player.inventory.weaponImage" alt="Weapon Image" class="weapon-image" />
+        Weapon: {{ player.inventory.weapon }}
+      </p>
+      <p>
+        <img [src]="player.inventory.armorImage" alt="Armor Image" class="armor-image" />
+        Armor: {{ player.inventory.armor }}
+      </p>
+    </div>
+  </div>
+  
+}

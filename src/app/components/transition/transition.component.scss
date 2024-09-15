@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+
+.transition-container {
+  background: linear-gradient(180deg, #000 0%, #333 150%);
+  color: #ddd;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Cinzel', serif; // Asegura la fuente medieval
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 2s ease-in-out forwards;
+
+  .intro-text {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .start-button {
+    background-color: #4A2F1C;
+    border: 2px solid #999;
+    color: #eee;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: 'UnifrakturMaguntia', serif;
+    width: auto; // Evita que ocupe todo el ancho de la pantalla
+    margin: 0 auto; // Centra el botón
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    
+    &:hover {
+      background-color: #4A2F1C;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: .95;
+    background-color: #000;
+  }
+  100% {
+    opacity: 1;
+    background-color: #333;
+  }
+}

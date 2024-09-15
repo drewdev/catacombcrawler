@@ -1,0 +1,11 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <h3>Reward Received: {{ reward.name }}</h3>
+    <img src="/reward/gold-sword.png" alt="Reward Image" />
+    <p>Would you like to equip it?</p>
+    <div class="modal-actions">
+      <button (click)="selectReward(true)">Yes</button>
+      <button (click)="selectReward(false)">No</button>
+    </div>
+  </div>
+</div>

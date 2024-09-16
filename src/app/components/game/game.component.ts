@@ -132,9 +132,10 @@ export class GameComponent {
     this.resetEnemy();      // Resetea al enemigo para la próxima pelea
   }
 
-  // Resetea al enemigo después de ser derrotado
   resetEnemy() {
-    this.store.dispatch(resetEnemy());
-    this.message = 'A new enemy approaches...';
+    this.player$.subscribe(player => {
+      // Despachamos la acción de resetEnemy pasando el estado del jugador
+      this.store.dispatch(resetEnemy({ player }));
+    }).unsubscribe();
   }
 }

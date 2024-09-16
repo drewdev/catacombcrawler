@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { PlayerState } from '../reducers/player.reducer';
 
 export const damageEnemy = createAction(
   '[Enemy] Damage Enemy',
@@ -11,5 +12,6 @@ export const persuadeEnemy = createAction(
 );
 
 export const resetEnemy = createAction(
-  '[Enemy] Reset Enemy',
+  '[Enemy] Reset',
+  props<{ player: PlayerState }>() // Aceptamos el estado del jugador como prop
 );

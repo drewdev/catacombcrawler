@@ -144,7 +144,7 @@ export class GameComponent {
     if (equip) {
       this.message = 'You equipped the reward!';
     } else {
-      const potion = Math.round(Math.random() * 50);
+      const potion = Math.round(Math.random() * 20)+5;
       this.message = `You drink a potion! it recovers ${ potion } hp.`;
       this.store.dispatch(damagePlayer({ damage: -potion }));
     }

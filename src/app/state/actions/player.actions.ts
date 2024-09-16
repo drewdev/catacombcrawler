@@ -30,3 +30,8 @@ export const updateReward = createAction(
   '[Player] Update Reward',
   props<{ reward: reward }>()
 );
+
+export const updatePotion = createAction(
+  '[Player] Update Potions',
+  props<{ potions: number }>()
+);

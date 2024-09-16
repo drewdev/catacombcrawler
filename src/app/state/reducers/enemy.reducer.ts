@@ -20,7 +20,7 @@ const initialEnemyState: EnemyState = {
   health: 25,
   maxHealth: 25,
   persuasion: 0,
-  attack: 8,
+  attack: 9,
   defense: 3,
   enemyType: 'skeleton' 
 };

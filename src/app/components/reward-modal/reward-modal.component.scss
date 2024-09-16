@@ -19,21 +19,67 @@ img {
   }
 }
 
-button {
-  background: linear-gradient(180deg, #4A2F1C 0%, #000 150%);
-  text-shadow: 5px 5px 5px black;
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
   border: 2px solid #F4EBC1;
-  color: #F4EBC1;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  &.potion {
-    background: linear-gradient(180deg, red 0%, #000 150%);
+  background: linear-gradient(180deg, #333 0%, #000 120%);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+  .plus {
+    color: green;
   }
-  &:hover {
-    background: #F4EBC1;
-    color: #4A2F1C;
+  .minus {
+    color: red;
+  }
+}
+
+.modal-actions {
+  margin-top: 20px;
+
+  button {
+    background: linear-gradient(180deg, #4A2F1C 0%, #000 150%);
+    text-shadow: 5px 5px 5px black;
+    border: 2px solid #F4EBC1;
+    color: #F4EBC1;
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &.potion {
+      background: linear-gradient(180deg, red 0%, #000 150%);
+    }
+    &:hover {
+      background: #F4EBC1;
+      color: #4A2F1C;
+    }
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 0.5s forwards;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

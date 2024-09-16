@@ -1,19 +1,27 @@
 <div class="modal-backdrop">
-  <div class="modal">
+  <div class="modal fade-in">
     @if (reward$ | async; as player) {
       <h3>Reward Received: {{ player.reward.name }}</h3>
       <p class="{{player.reward.rarity}}">{{ player.reward.rarity }}</p>
       @if (player.reward.attack) {
-        <p> attack {{ player.reward.attack }} </p>
+        @if (player.attack > player.reward.attack) {
+          <p> attack {{ player.reward.attack }} ( <b class="minus">-{{player.attack - player.reward.attack}}</b> to atk)</p>
+        } @else {
+          <p> attack {{ player.reward.attack }} ( <b class="plus">+{{player.reward.attack - player.attack}}</b> to atk)</p>
+        }
       }
       @if (player.reward.defense) {
-        <p> defense {{ player.reward.defense }} </p>
+        @if (player.defense > player.reward.defense) {
+          <p> defense {{ player.reward.defense }} ( <b class="minus">-{{player.defense - player.reward.defense}}</b> to def)</p>
+        } @else {
+          <p> defense {{ player.reward.defense }} ( <b class="plus">+{{player.reward.defense - player.defense}}</b> to def)</p>
+        }
       }
       <img class="{{player.reward.rarity}}" src="{{player.reward.image}}" alt="Reward Image" />
       <p>Would you like to equip it?</p>
       <div class="modal-actions">
         <button (click)="selectReward(true, player.reward, player.reward.attack)">Yes</button>
-        <button class="potion" (click)="selectReward(false, player.reward)">Drink potion instead</button>
+        <button class="potion" (click)="selectReward(false, player.reward)">Take a potion instead</button>
       </div>
     }
     

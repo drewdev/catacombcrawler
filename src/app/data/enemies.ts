@@ -5,7 +5,7 @@ export const enemies = [
     health: 25,
     maxHealth: 25,
     persuasion: 0,
-    attack: 8,
+    attack: 9,
     defense: 3,
     levelRange: [1, 5],
     enemyType: 'skeleton'
@@ -38,7 +38,7 @@ export const enemies = [
     health: 50,
     maxHealth: 50,
     persuasion: 0,
-    attack: 13,
+    attack: 14,
     defense: 7,
     levelRange: [6, 10],
     enemyType: 'zombie'
@@ -49,7 +49,7 @@ export const enemies = [
     health: 30,
     maxHealth: 30,
     persuasion: 0,
-    attack: 14,
+    attack: 15,
     defense: 5,
     levelRange: [6, 10],
     enemyType: 'zombie'
@@ -60,7 +60,7 @@ export const enemies = [
     health: 60,
     maxHealth: 60,
     persuasion: 0,
-    attack: 11,
+    attack: 15,
     defense: 3,
     levelRange: [6, 10],
     enemyType: 'zombie'
@@ -71,7 +71,7 @@ export const enemies = [
     health: 45,
     maxHealth: 45,
     persuasion: 0,
-    attack: 14,
+    attack: 16,
     defense: 1,
     levelRange: [11, 15],
     enemyType: 'vampire'
@@ -93,7 +93,7 @@ export const enemies = [
     health: 66,
     maxHealth: 66,
     persuasion: 0,
-    attack: 16,
+    attack: 19,
     defense: 9,
     levelRange: [11, 15],
     enemyType: 'vampire'

@@ -3,14 +3,19 @@
   <div class="game-story">
     <app-text-box [text]="message"></app-text-box>
     <div class="actions">
-      <button (click)="onPersuade()" [disabled]="disableActions">Persuade</button>
-      <button (click)="onAttack()" [disabled]="disableActions">Attack</button>
-      <button (click)="onEscape()" [disabled]="disableActions">Escape</button>
+      @if (player$ | async; as player) {
+        <button (click)="onPersuade()" [disabled]="disableActions">🤝 Persuade</button>
+        <button (click)="onAttack()" [disabled]="disableActions">⚔️ Attack</button>
+        <button class="potion" (click)="onDrinkPotion()" [disabled]="(disableActions || player.inventory.potions === 0)">
+          [ {{ player.inventory.potions}} ]❤️ Drink Potion
+        </button>
+        <button class="escape" (click)="onEscape()" [disabled]="disableActions">➡ Escape</button>
+      }
     </div>
 
     <app-dice #dice></app-dice>
     @if (diceRoll !== null) {
-      <div>
+      <div class="dice-result">
         Dice result: {{ diceRoll }}
       </div>
     }

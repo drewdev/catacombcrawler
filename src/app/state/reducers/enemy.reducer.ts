@@ -12,8 +12,8 @@ export interface EnemyState {
 
 const initialEnemyState: EnemyState = {
   name: 'Skeleton Warrior',
-  health: 50,
-  maxHealth: 50,
+  health: 30,
+  maxHealth: 30,
   persuasion: 0,
   attack: 8,
   defense: 3

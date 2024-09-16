@@ -1,11 +1,21 @@
 <div class="modal-backdrop">
   <div class="modal">
-    <h3>Reward Received: {{ reward.name }}</h3>
-    <img src="/reward/gold-sword.png" alt="Reward Image" />
-    <p>Would you like to equip it?</p>
-    <div class="modal-actions">
-      <button (click)="selectReward(true)">Yes</button>
-      <button (click)="selectReward(false)">No</button>
-    </div>
+    @if (reward$ | async; as player) {
+      <h3>Reward Received: {{ player.reward.name }}</h3>
+      <p class="{{player.reward.rarity}}">{{ player.reward.rarity }}</p>
+      @if (player.reward.attack) {
+        <p> attack {{ player.reward.attack }} </p>
+      }
+      @if (player.reward.defense) {
+        <p> defense {{ player.reward.defense }} </p>
+      }
+      <img class="{{player.reward.rarity}}" src="{{player.reward.image}}" alt="Reward Image" />
+      <p>Would you like to equip it?</p>
+      <div class="modal-actions">
+        <button (click)="selectReward(true, player.reward, player.reward.attack)">Yes</button>
+        <button (click)="selectReward(false, player.reward)">No</button>
+      </div>
+    }
+    
   </div>
 </div>

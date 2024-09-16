@@ -4,9 +4,9 @@
       <app-text-box [text]="message"></app-text-box>
       <h2></h2>
       <div class="actions">
-        <button (click)="onPersuade()">Persuade</button>
-        <button (click)="onAttack()">Attack</button>
-        <button (click)="onEscape()">Escape</button>
+        <button (click)="onPersuade()" [disabled]="disableActions">Persuade</button>
+        <button (click)="onAttack()" [disabled]="disableActions">Attack</button>
+        <button (click)="onEscape()" [disabled]="disableActions">Escape</button>
       </div>
 
       <app-dice #dice></app-dice>

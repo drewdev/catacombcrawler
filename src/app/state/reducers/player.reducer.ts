@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { damagePlayer, healPlayer, updateInventory } from '../actions/player.actions';
+import { damagePlayer, healPlayer, updateArmor, updateInventory, updateReward, updateWeapon } from '../actions/player.actions';
+import { reward } from '../../data/drop-tables';
 
 export interface PlayerState {
   level: number;
@@ -15,21 +16,29 @@ export interface PlayerState {
     armorDef: number;
     armorImage: string;
   };
+  reward: reward
 }
 
 const initialPlayerState: PlayerState = {
   level: 1,
   name: 'Sir Shrek',
   health: 100,
-  attack: 10,
+  attack: 5,
   defense: 5,
   inventory: {
-    weapon: 'Sword',
-    weaponDmg: 2,
-    weaponImage: '/player/sword.png',
-    armor: 'Iron Armor',
-    armorDef: 2,
-    armorImage: '/player/armor.png'
+    weapon: 'Dagger',
+    weaponDmg: 0,
+    weaponImage: '/reward/dagger.png',
+    armor: 'Scraps Armor',
+    armorDef: 0,
+    armorImage: '/reward/base-armor.png'
+  },
+  reward: {
+    name: 'Sword',
+    attack: 2,
+    defense: 2,
+    rarity: '',
+    image: '/player/sword.png',
   }
 };
 
@@ -46,5 +55,22 @@ export const playerReducer = createReducer(
   on(updateInventory, (state, { weapon, armor }) => ({
     ...state,
     inventory: { ...state.inventory, weapon, armor },
-  }))
+  })),
+  on(updateWeapon, (state, { weapon, weaponDmg, weaponImage }) => ({
+    ...state,
+    attack: weaponDmg,
+    weaponImage,
+    inventory: { ...state.inventory, weapon, weaponDmg, weaponImage  },
+  })),
+  on(updateArmor, (state, { armor, armorDef, armorImage }) => ({
+    ...state,
+    defense: armorDef,
+    armorImage,
+    inventory: { ...state.inventory, armor, armorDef, armorImage },
+  })),
+  on(updateReward, (state, { reward }) => ({
+    ...state,
+    level: state.level + 1,
+    reward
+  })),
 );

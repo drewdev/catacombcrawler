@@ -1,25 +1,26 @@
-.legendary {
+.Legendary {
   color: rgb(194, 196, 72);
 }
-.rare {
+.Rare {
   color: rgb(33, 78, 201);
 }
-.common {
+.Common {
   color: rgb(236, 236, 236);
 }
 img {
-  &.legendary {
+  &.Legendary {
     border: 2px solid rgb(194, 196, 72);
   }
-  &.rare {
+  &.Rare {
     border: 2px solid rgb(33, 78, 201);
   }
-  &.common {
+  &.Common {
     border: 2px solid rgb(236, 236, 236);
   }
 }
 
 .modal-backdrop {
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
@@ -32,6 +33,7 @@ img {
 }
 
 .modal {
+  z-index: 1001;
   border: 2px solid #F4EBC1;
   background: linear-gradient(180deg, #333 0%, #000 120%);
   padding: 20px;

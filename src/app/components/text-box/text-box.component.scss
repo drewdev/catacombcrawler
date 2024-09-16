@@ -7,6 +7,10 @@
   font-size: 18px;
   width: 65%;
   margin: 20px auto;
+  @media screen and (max-width: 480px) {
+    width: 85%;
+    padding: 0px 10px;
+  }
 }
 .critical {
   color: rgb(216, 216, 90);

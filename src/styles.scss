@@ -2,19 +2,21 @@
 
 body {
   margin: 0px;
+
 }
 
 .game-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100vh;
+  min-height: 100vh;  /* Cambiar de height a min-height para permitir más flexibilidad */
   background-color: #1e1e1e;
   box-shadow: inset 0px 300px 300px rgba(0, 0, 0, 0.7), inset -10px 300px 300px rgba(0, 0, 0, 0.7), inset 0px 350px 300px rgba(0, 0, 0, 0.7);
-  
   color: white;
   font-family: 'MedievalSharp', cursive;
 }
+
+
 
 .dungeon-background {
   position: relative;
@@ -22,6 +24,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 480px) {
+    height: 40vh;
+  }
 }
 
 .dungeon-image {
@@ -30,10 +36,7 @@ body {
   object-fit: scale-down;
 }
 
-img {
-  width: 100px;
-  height: 100px;
-}
+
 
 .health-bar {
   width: 100%;

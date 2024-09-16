@@ -2,6 +2,10 @@
   bottom: 20px;
   width: 100px;
   height: 100px;
+  @media screen and (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .enemy-stats {
@@ -17,4 +21,18 @@
   padding: 10px;
   color: white;
   border-radius: 5px;
+  @media screen and (max-width: 768px) {
+    width: 35%;
+    height: 34%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 50%;
+    height: 53%;
+  }
+}
+
+.enemy-image {
+  @media screen and (max-width: 480px) {
+    display: flex;
+  }
 }

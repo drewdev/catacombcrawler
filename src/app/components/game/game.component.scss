@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  max-width: 100%;
   button {
     background: linear-gradient(180deg, #4A2F1C 0%, #000 150%);
     text-shadow: 5px 5px 5px black;
@@ -32,7 +33,16 @@
       background: #F4EBC1;
       color: #4A2F1C;
     }
+    @media screen and (max-width: 480px) {
+      width: 90%;
+      padding: 0px 5px;
+    }
+    @media screen and (max-width: 345px) {
+      width: 80%;
+      padding: 0px 0px;
+    }
   }
+
 }
 .dice-result {
   margin-top: 1em;

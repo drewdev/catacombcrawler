@@ -7,7 +7,7 @@
         <button (click)="onPersuade()" [disabled]="disableActions">🤝 Persuade</button>
         <button (click)="onAttack()" [disabled]="disableActions">⚔️ Attack</button>
         <button class="potion" (click)="onDrinkPotion()" [disabled]="(disableActions || player.inventory.potions === 0)">
-          [ {{ player.inventory.potions}} ]❤️ Drink Potion
+          [ {{ player.inventory.potions}} ]❤️ Potion
         </button>
         <button class="escape" (click)="onEscape()" [disabled]="disableActions">➡ Escape</button>
       }

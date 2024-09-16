@@ -32,7 +32,7 @@ export class TextBoxComponent implements OnInit, OnChanges  {
   }
 
   typeText(): void {
-    const typingSpeed = 25;
+    const typingSpeed = 20;
     if (this.currentCharIndex < this.text.length) {
       this.displayedText += this.text.charAt(this.currentCharIndex);
       this.currentCharIndex++;

@@ -13,7 +13,9 @@ export class HomeComponent {
   private router = inject(Router);  // Inyectar el Router de Angular
 
   onPlay() {
+    this.router.navigate(['/transition'], { skipLocationChange: true });
     // Simula el login básico con credenciales predefinidas
+    /*
     const username = prompt('Enter username:');
     const password = prompt('Enter password:');
     
@@ -22,5 +24,6 @@ export class HomeComponent {
     } else {
       alert('Credenciales incorrectas. Intenta de nuevo.');
     }
+    */
   }
 }

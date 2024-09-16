@@ -14,6 +14,6 @@ export class TransitionComponent {
   constructor(private router: Router) {}
 
   startGame() {
-    this.router.navigate(['/game']);  // Te lleva al componente del juego
+    this.router.navigate(['/game'], { skipLocationChange: true });  // Te lleva al componente del juego
   }
 }

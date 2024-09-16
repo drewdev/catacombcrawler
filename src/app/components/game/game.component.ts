@@ -32,15 +32,15 @@ export class GameComponent {
 
   getBackgroundImage(level: number): string {
     if (level > 20) {
-      return '/dragons.png';
+      return './dragons.png';
     } else if (level > 15) {
-      return '/specters.png';
+      return './specters.png';
     } else if (level > 10) {
-      return '/vampire-level.png';
+      return './vampire-level.png';
     } else if (level > 5) {
-      return '/zombie.png';
+      return './zombie.png';
     } else {
-      return '/game.png';
+      return './game.png';
     }
   }
 
@@ -95,7 +95,7 @@ export class GameComponent {
     }).unsubscribe();
     this.message = `You swing your sword at the ${ enemyName }!`;
     const result = await this.rollDice();
-    if (result > 2) {
+    if (result > 3) {
       const damage = result === 6 ? attack * 2 - enemyDef : attack + result - enemyDef;
       this.store.dispatch(damageEnemy({ damage }));
       this.message = result === 6 ? `Critical Hit! You dealt ${damage} damage to the ${ enemyName }!` : `You dealt ${damage} damage to the ${ enemyName }!`;

@@ -1,7 +1,7 @@
 export const enemies = [
   {
     name: 'Skeleton Warrior',
-    enemyImg: '/enemies/spooky-skeleton.gif',
+    enemyImg: './enemies/spooky-skeleton.gif',
     health: 25,
     maxHealth: 25,
     persuasion: 0,
@@ -12,7 +12,7 @@ export const enemies = [
   },
   {
     name: 'Skeleton Archer',
-    enemyImg: '/enemies/skeleton-archer.gif',
+    enemyImg: './enemies/skeleton-archer.gif',
     health: 20,
     maxHealth: 20,
     persuasion: 0,
@@ -23,7 +23,7 @@ export const enemies = [
   },
   {
     name: 'Skeleton Mage',
-    enemyImg: '/enemies/skeleton-mage.gif',
+    enemyImg: './enemies/skeleton-mage.gif',
     health: 20,
     maxHealth: 20,
     persuasion: 0,
@@ -34,7 +34,7 @@ export const enemies = [
   },
   {
     name: 'Zombie Brute',
-    enemyImg: '/enemies/zombie.webp',
+    enemyImg: './enemies/zombie.webp',
     health: 50,
     maxHealth: 50,
     persuasion: 0,
@@ -45,7 +45,7 @@ export const enemies = [
   },
   {
     name: 'Zombie Hound',
-    enemyImg: '/enemies/zombie-hounds.gif',
+    enemyImg: './enemies/zombie-hounds.gif',
     health: 30,
     maxHealth: 30,
     persuasion: 0,
@@ -56,7 +56,7 @@ export const enemies = [
   },
   {
     name: 'Zombie Horde',
-    enemyImg: '/enemies/zombie-horde.gif',
+    enemyImg: './enemies/zombie-horde.gif',
     health: 60,
     maxHealth: 60,
     persuasion: 0,
@@ -67,7 +67,7 @@ export const enemies = [
   },
   {
     name: 'Vampire Bat Swarm',
-    enemyImg: '/enemies/vampire-swarm.gif',
+    enemyImg: './enemies/vampire-swarm.gif',
     health: 45,
     maxHealth: 45,
     persuasion: 0,
@@ -78,7 +78,7 @@ export const enemies = [
   },
   {
     name: 'Vampire Lord',
-    enemyImg: '/enemies/vampire-lord.gif',
+    enemyImg: './enemies/vampire-lord.gif',
     health: 65,
     maxHealth: 65,
     persuasion: 0,
@@ -89,7 +89,7 @@ export const enemies = [
   },
   {
     name: 'Nosferatu',
-    enemyImg: '/enemies/nosferatu.gif',
+    enemyImg: './enemies/nosferatu.gif',
     health: 66,
     maxHealth: 66,
     persuasion: 0,
@@ -100,7 +100,7 @@ export const enemies = [
   },
   {
     name: 'Ghost',
-    enemyImg: '/enemies/ghost.gif',
+    enemyImg: './enemies/ghost.gif',
     health: 70,
     maxHealth: 70,
     persuasion: 0,
@@ -111,7 +111,7 @@ export const enemies = [
   },
   {
     name: 'Necromancer',
-    enemyImg: '/enemies/necromancer.gif',
+    enemyImg: './enemies/necromancer.gif',
     health: 66,
     maxHealth: 66,
     persuasion: 0,
@@ -122,7 +122,7 @@ export const enemies = [
   },
   {
     name: 'Lich King',
-    enemyImg: '/enemies/lich-king.gif',
+    enemyImg: './enemies/lich-king.gif',
     health: 80,
     maxHealth: 80,
     persuasion: 0,
@@ -133,7 +133,7 @@ export const enemies = [
   },
   {
     name: 'Dragon',
-    enemyImg: '/enemies/dragon.gif',
+    enemyImg: './enemies/dragon.gif',
     health: 100,
     maxHealth: 100,
     persuasion: 0,
@@ -144,7 +144,7 @@ export const enemies = [
   },
   {
     name: 'Elder Dragon',
-    enemyImg: '/enemies/dragon-final.gif',
+    enemyImg: './enemies/dragon-final.gif',
     health: 130,
     maxHealth: 130,
     persuasion: 0,
@@ -155,7 +155,7 @@ export const enemies = [
   },
   {
     name: 'Lava Dragon',
-    enemyImg: '/enemies/lava-dragon.gif',
+    enemyImg: './enemies/lava-dragon.gif',
     health: 150,
     maxHealth: 150,
     persuasion: 0,

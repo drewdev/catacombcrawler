@@ -16,7 +16,7 @@ export interface EnemyState {
 
 const initialEnemyState: EnemyState = {
   name: 'Skeleton Warrior',
-  enemyImg: '/enemies/spooky-skeleton.gif',
+  enemyImg: './enemies/spooky-skeleton.gif',
   health: 25,
   maxHealth: 25,
   persuasion: 0,

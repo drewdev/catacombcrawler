@@ -28,17 +28,17 @@ const initialPlayerState: PlayerState = {
   inventory: {
     weapon: 'Dagger',
     weaponDmg: 0,
-    weaponImage: '/reward/dagger.png',
+    weaponImage: './reward/dagger.png',
     armor: 'Scraps Armor',
     armorDef: 0,
-    armorImage: '/reward/base-armor.png'
+    armorImage: './reward/base-armor.png'
   },
   reward: {
     name: 'Sword',
     attack: 2,
     defense: 2,
     rarity: '',
-    image: '/player/sword.png',
+    image: './player/sword.png',
   }
 };
 

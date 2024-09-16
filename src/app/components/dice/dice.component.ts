@@ -44,12 +44,12 @@ export class DiceComponent implements AfterViewInit {
   createDice() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const textures = [
-      new THREE.TextureLoader().load('/dice/dice4.png'),
-      new THREE.TextureLoader().load('/dice/dice3.png'),
-      new THREE.TextureLoader().load('/dice/dice5.png'),
-      new THREE.TextureLoader().load('/dice/dice2.png'),
-      new THREE.TextureLoader().load('/dice/dice6.png'),
-      new THREE.TextureLoader().load('/dice/dice1.png')
+      new THREE.TextureLoader().load('./dice/dice4.png'),
+      new THREE.TextureLoader().load('./dice/dice3.png'),
+      new THREE.TextureLoader().load('./dice/dice5.png'),
+      new THREE.TextureLoader().load('./dice/dice2.png'),
+      new THREE.TextureLoader().load('./dice/dice6.png'),
+      new THREE.TextureLoader().load('./dice/dice1.png')
     ];
 
     const materials = textures.map(texture => new THREE.MeshBasicMaterial({ map: texture }));

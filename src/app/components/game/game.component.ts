@@ -10,18 +10,19 @@ import { EnemyComponent } from '../enemy/enemy.component';
 import { RewardModalComponent } from '../reward-modal/reward-modal.component';
 import { TextBoxComponent } from '../text-box/text-box.component';
 import { DiceComponent } from '../dice/dice.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  imports: [PlayerComponent, EnemyComponent, ActionButtonsComponent, RewardModalComponent, TextBoxComponent, DiceComponent],
+  imports: [PlayerComponent, EnemyComponent, ActionButtonsComponent, RewardModalComponent, TextBoxComponent, DiceComponent, AsyncPipe],
 })
 export class GameComponent {
   player$ = this.store.select('player');
   enemy$ = this.store.select('enemy');
-  message: string = 'You encounter a Skeleton Warrior in the dungeon! What will you do?';
+  message: string = 'You encounter an Enemy in the dungeon! What will you do?';
   showModal = false;
   @ViewChild(DiceComponent) diceComponent!: DiceComponent;
   diceRoll: number | undefined = undefined;
@@ -29,19 +30,31 @@ export class GameComponent {
 
   constructor(private store: Store<{ player: PlayerState; enemy: EnemyState }>) {}
 
-  // Método para tirar el dado y esperar a su resultado
+  getBackgroundImage(level: number): string {
+    if (level > 20) {
+      return '/dragons.png';
+    } else if (level > 15) {
+      return '/specters.png';
+    } else if (level > 10) {
+      return '/vampire-level.png';
+    } else if (level > 5) {
+      return '/zombie.png';
+    } else {
+      return '/game.png';
+    }
+  }
+
   async rollDice(): Promise<number> {
-    this.diceRoll = undefined; // Resetea el valor antes de la tirada
+    this.diceRoll = undefined;
     this.disableActions = true;
     const result = await this.diceComponent.rollDice();
     this.diceRoll = result;
     setTimeout(() => {
       this.disableActions = false;
-    }, 1000);
-    return result; // Retorna el resultado del dado
+    }, 600);
+    return result;
   }
 
-  // Persuadir al enemigo
   async onPersuade() {
     let enemyName = '';
     this.enemy$.subscribe((enemy) => {
@@ -56,7 +69,7 @@ export class GameComponent {
       this.enemy$.subscribe((enemy) => {
         if (enemy.persuasion >= 100) {
           this.message = `You are now friends with the ${ enemyName }! He wants to give you a gift!`;
-          this.showModal = true; // Muestra el modal de recompensa
+          this.showModal = true;
         }
       }).unsubscribe();
     } else {
@@ -65,7 +78,6 @@ export class GameComponent {
     }
   }
 
-  // Atacar al enemigo
   async onAttack() {
     let attack = 0;
     let def = 0;
@@ -87,11 +99,10 @@ export class GameComponent {
       const damage = result === 6 ? attack * 2 - enemyDef : attack + result - enemyDef;
       this.store.dispatch(damageEnemy({ damage }));
       this.message = result === 6 ? `Critical Hit! You dealt ${damage} damage to the ${ enemyName }!` : `You dealt ${damage} damage to the ${ enemyName }!`;
-      // Verificamos si la salud del enemigo llegó a 0
       this.enemy$.subscribe((enemy) => {
         if (enemy.health <= 0) {
           this.message = `You have defeated the ${ enemyName } Warrior!`;
-          this.showModal = true; // Muestra el modal de recompensa
+          this.showModal = true;
         }
       }).unsubscribe();
     } else {
@@ -108,33 +119,41 @@ export class GameComponent {
     }
   }
 
-  // Intentar escapar
   async onEscape() {
     this.message = 'You try to escape from the Skeleton Warrior...';
     const result = await this.rollDice();
     if (result === 6) {
       this.message = 'You successfully escaped!';
+      this.showModal = true;
     } else {
-      this.message = 'Escape failed! The Skeleton attacks you!';
-      this.store.dispatch(damagePlayer({ damage: result || 1 }));
+      let damage = 0;
+      let enemyName = '';
+      this.enemy$.subscribe((enemy) => {
+        damage = enemy.attack;
+        enemyName = enemy.name;
+      }).unsubscribe();
+      damage = result === 1 ? damage * 3 : damage * 2;
+      this.message = result === 1 ? 
+        `You tripped while trying to escape! The ${ enemyName } deals you a fatal blow! You lose ${ damage } hp!`
+        : `Escape failed! The ${ enemyName } attacks you! You lose ${ damage } hp!`;
+      this.store.dispatch(damagePlayer({ damage }));
     }
   }
 
-  // Función para manejar la selección de recompensa
   handleRewardSelection(equip: boolean) {
     if (equip) {
-      // Aquí se manejaría el equipamiento de la recompensa
       this.message = 'You equipped the reward!';
     } else {
-      this.message = 'You chose not to equip the reward.';
+      const potion = Math.round(Math.random() * 50);
+      this.message = `You drink a potion! it recovers ${ potion } hp.`;
+      this.store.dispatch(damagePlayer({ damage: -potion }));
     }
-    this.showModal = false; // Cierra el modal
-    this.resetEnemy();      // Resetea al enemigo para la próxima pelea
+    this.showModal = false;
+    this.resetEnemy();
   }
 
   resetEnemy() {
     this.player$.subscribe(player => {
-      // Despachamos la acción de resetEnemy pasando el estado del jugador
       this.store.dispatch(resetEnemy({ player }));
     }).unsubscribe();
   }

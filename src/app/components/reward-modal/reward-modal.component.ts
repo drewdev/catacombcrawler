@@ -38,7 +38,7 @@ export class RewardModalComponent implements OnInit {
       this.store.dispatch(updateWeapon({ weapon: reward.name, weaponDmg: reward.attack, weaponImage: reward.image })) :
       this.store.dispatch(updateArmor({ armor: reward.name, armorDef: reward.defense, armorImage: reward.image }));
     } else {
-      this.onRewardSelection.emit(false);
+      return this.onRewardSelection.emit(false);
     }
     this.onRewardSelection.emit(true);
   }

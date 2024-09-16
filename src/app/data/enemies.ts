@@ -35,8 +35,8 @@ export const enemies = [
   {
     name: 'Zombie Brute',
     enemyImg: '/enemies/zombie.webp',
-    health: 60,
-    maxHealth: 60,
+    health: 50,
+    maxHealth: 50,
     persuasion: 0,
     attack: 13,
     defense: 4,
@@ -49,7 +49,18 @@ export const enemies = [
     health: 30,
     maxHealth: 30,
     persuasion: 0,
-    attack: 16,
+    attack: 15,
+    defense: 3,
+    levelRange: [6, 10],
+    enemyType: 'zombie'
+  },
+  {
+    name: 'Zombie Horde',
+    enemyImg: '/enemies/zombie-horde.gif',
+    health: 60,
+    maxHealth: 60,
+    persuasion: 0,
+    attack: 11,
     defense: 3,
     levelRange: [6, 10],
     enemyType: 'zombie'
@@ -57,21 +68,32 @@ export const enemies = [
   {
     name: 'Vampire Bat Swarm',
     enemyImg: '/enemies/vampire-swarm.gif',
-    health: 35,
-    maxHealth: 35,
+    health: 45,
+    maxHealth: 45,
     persuasion: 0,
-    attack: 10,
+    attack: 8,
     defense: 1,
-    levelRange: [6, 10],
+    levelRange: [11, 15],
     enemyType: 'vampire'
   },
   {
     name: 'Vampire Lord',
     enemyImg: '/enemies/vampire-lord.gif',
-    health: 60,
+    health: 65,
     maxHealth: 60,
     persuasion: 0,
     attack: 15,
+    defense: 5,
+    levelRange: [11, 15],
+    enemyType: 'vampire'
+  },
+  {
+    name: 'Nosferatu',
+    enemyImg: '/enemies/nosferatu.gif',
+    health: 77,
+    maxHealth: 77,
+    persuasion: 0,
+    attack: 16,
     defense: 5,
     levelRange: [11, 15],
     enemyType: 'vampire'
@@ -116,7 +138,7 @@ export const enemies = [
     maxHealth: 100,
     persuasion: 0,
     attack: 20,
-    defense: 15,
+    defense: 12,
     levelRange: [21, 25],
     enemyType: 'dragon'
   },
@@ -127,7 +149,18 @@ export const enemies = [
     maxHealth: 150,
     persuasion: 0,
     attack: 25,
-    defense: 12,
+    defense: 15,
+    levelRange: [21, 25],
+    enemyType: 'dragon'
+  },
+  {
+    name: 'Lava Dragon',
+    enemyImg: '/enemies/lava-dragon.gif',
+    health: 180,
+    maxHealth: 150,
+    persuasion: 0,
+    attack: 30,
+    defense: 18,
     levelRange: [21, 25],
     enemyType: 'dragon'
   }

@@ -1,24 +1,26 @@
 <div class="game-container">
-    <!-- Área central con narrativa y opciones -->
-    <div class="game-story">
-      <app-text-box [text]="message"></app-text-box>
-      <h2></h2>
-      <div class="actions">
-        <button (click)="onPersuade()" [disabled]="disableActions">Persuade</button>
-        <button (click)="onAttack()" [disabled]="disableActions">Attack</button>
-        <button (click)="onEscape()" [disabled]="disableActions">Escape</button>
-      </div>
-
-      <app-dice #dice></app-dice>
-      @if (diceRoll !== null) {
-        <div>
-          Dice result: {{ diceRoll }}
-        </div>
-      }
+  <!-- Área central con narrativa y opciones -->
+  <div class="game-story">
+    <app-text-box [text]="message"></app-text-box>
+    <div class="actions">
+      <button (click)="onPersuade()" [disabled]="disableActions">Persuade</button>
+      <button (click)="onAttack()" [disabled]="disableActions">Attack</button>
+      <button (click)="onEscape()" [disabled]="disableActions">Escape</button>
     </div>
+
+    <app-dice #dice></app-dice>
+    @if (diceRoll !== null) {
+      <div>
+        Dice result: {{ diceRoll }}
+      </div>
+    }
+  </div>
+
   <!-- Imagen de fondo para la mazmorra -->
   <div class="dungeon-background">
-    <img src="/game.png" alt="Dungeon Background" class="dungeon-image" />
+    @if (player$ | async; as player) {
+      <img [src]="getBackgroundImage(player.level)" alt="Dungeon Background" class="dungeon-image" />
+    }
   </div>
 
   <!-- Componente del jugador -->

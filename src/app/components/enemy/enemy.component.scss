@@ -26,8 +26,15 @@
     height: 34%;
   }
   @media screen and (max-width: 480px) {
+    top: 50%;
     width: 50%;
-    height: 53%;
+    height: 35%;
+    h3 {
+      font-size: 1em;
+    }
+    p {
+      font-size: .7em;
+    }
   }
 }
 

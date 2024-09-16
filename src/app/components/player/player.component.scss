@@ -23,12 +23,19 @@
     .player-stats {
       width: 100%;
     }
+    .player-data {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
       .portrait{
+        float: left;
         img {
-          width: 50px;
-          height: 50px;
+          width: 80px;
+          height: 80px;
         }
       }  
+    }
+      
   }
 
   .player-data {

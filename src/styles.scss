@@ -20,14 +20,10 @@ body {
 
 .dungeon-background {
   position: relative;
-  height: 50vh;
+  height: 51vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media screen and (max-width: 480px) {
-    height: 40vh;
-  }
 }
 
 .dungeon-image {

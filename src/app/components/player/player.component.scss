@@ -69,12 +69,16 @@
     justify-content: space-around;
     @media screen and (max-width: 480px) {
       width: 100%;
+      font-size: 12px;
     }
     .stats {
       div {
         display: flex;
         align-items: center;
         height: 58px;
+        @media screen and (max-width: 480px) {
+          height: 38px;
+        }
       }
     }
   }

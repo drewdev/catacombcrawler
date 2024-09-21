@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CharacterService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://catacombcrawler-nestjs-production.up.railway.app';
 
   constructor(private http: HttpClient) {}
 

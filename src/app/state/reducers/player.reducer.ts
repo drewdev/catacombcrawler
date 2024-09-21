@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { damagePlayer, healPlayer, updateArmor, updateInventory, updatePotion, updateReward, updateWeapon } from '../actions/player.actions';
+import { damagePlayer, healPlayer, updateArmor, updateInventory, updatePlayerName, updatePotion, updateReward, updateWeapon } from '../actions/player.actions';
 import { reward } from '../../data/drop-tables';
 
 export interface PlayerState {
@@ -22,16 +22,16 @@ export interface PlayerState {
 
 const initialPlayerState: PlayerState = {
   level: 1,
-  name: 'Sir Shrek',
+  name: '',
   health: 100,
   attack: 5,
   defense: 5,
   inventory: {
     weapon: 'Dagger',
-    weaponDmg: 0,
+    weaponDmg: 5,
     weaponImage: './reward/dagger.png',
     armor: 'Scraps Armor',
-    armorDef: 0,
+    armorDef: 5,
     armorImage: './reward/base-armor.png',
     potions: 3,
   },
@@ -78,5 +78,9 @@ export const playerReducer = createReducer(
   on(updatePotion, (state, { potions }) => ({
     ...state,
     inventory: { ...state.inventory, potions: state.inventory.potions + potions },
+  })),
+  on(updatePlayerName, (state, { name }) => ({
+    ...state,
+    name
   })),
 );

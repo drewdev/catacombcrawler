@@ -1,0 +1,25 @@
+<h3 class="leaderboard-title">Players Leaderboard</h3>
+<div class="center">
+  <button class="start-button" (click)="back()">Back to home</button>
+</div>
+<div class="leaderboard-container">
+  <div class="leaderboard-header">
+    <span>Name</span>
+    <span>Level</span>
+    <span>Weapon</span>
+    <span>Damage</span>
+    <span>Armour</span>
+    <span>Defense</span>
+  </div>
+  
+  @for (player of players; track player.id) {
+    <div class="leaderboard-row">
+      <span>{{ player.name }}</span>
+      <span>{{ player.level }}</span>
+      <span>{{ player.inventory.weapon.name }}</span>
+      <span class="red-text">{{ player.inventory.weapon.attack }}</span>
+      <span>{{ player.inventory.armour.name }}</span>
+      <span class="blue-text">{{ player.inventory.armour.defense }}</span>
+    </div>
+  }
+</div>

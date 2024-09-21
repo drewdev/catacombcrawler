@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
-
 .transition-container {
   background: linear-gradient(180deg, #000 0%, #333 150%);
   color: #ddd;
@@ -11,7 +10,6 @@
   flex-direction: column;
   justify-content: center;
   animation: fadeIn 2s ease-in-out forwards;
-
   .intro-text {
     font-size: 1.3rem;
     margin-bottom: 30px;
@@ -21,24 +19,28 @@
     margin-right: auto;
   }
 
-  .start-button {
-    background-color: #4A2F1C;
-    border: 2px solid #999;
-    color: #eee;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    font-family: 'UnifrakturMaguntia', serif;
-    width: auto; // Evita que ocupe todo el ancho de la pantalla
-    margin: 0 auto; // Centra el botón
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s, transform 0.2s;
-    
-    &:hover {
-      background-color: #4A2F1C;
-      transform: scale(1.05);
-    }
+  .start-button:disabled {
+    background-color: #999;
   }
+  .custom-input {
+    width: 30%;
+    padding: 0.5rem;
+    margin: 0 auto 2em;
+    border: 2px solid #888;
+    border-radius: 5px;
+    background: #1a1a1a;
+    color: #f5e3c3;
+    font-size: 1.2rem;
+    font-family: 'MedievalSharp', serif;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .custom-input:focus {
+    border: 2px solid #f5e3c3;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  
 }
 
 @keyframes fadeIn {

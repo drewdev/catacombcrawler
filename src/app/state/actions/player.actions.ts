@@ -35,3 +35,8 @@ export const updatePotion = createAction(
   '[Player] Update Potions',
   props<{ potions: number }>()
 );
+
+export const updatePlayerName = createAction(
+  '[Player] Update Player Name',
+  props<{ name: string }>()
+);

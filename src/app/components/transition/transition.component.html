@@ -4,5 +4,6 @@
     Your armor will protect you, your weapon will guide you, and the roll of the dice will determine your fate. 
     Are you ready for the challenge?
   </div>
-  <button class="start-button" (click)="startGame()">Start the Adventure</button>
+  <input class="custom-input" placeholder="Enter you name..." [(ngModel)]="name" #ctrl="ngModel" required minlength="3">
+  <button class="start-button" (click)="startGame()" [disabled]="!(name.length > 2)">Start the Adventure</button>
 </div>

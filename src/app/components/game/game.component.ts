@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router'; // Importar Router para redirigir a la pantalla de "muerte"
+import { Router } from '@angular/router';
 import { damageEnemy, persuadeEnemy, resetEnemy } from '../../state/actions/enemy.actions';
 import { damagePlayer, updatePotion } from '../../state/actions/player.actions';
 import { EnemyState } from '../../state/reducers/enemy.reducer';
@@ -12,6 +12,7 @@ import { RewardModalComponent } from '../reward-modal/reward-modal.component';
 import { TextBoxComponent } from '../text-box/text-box.component';
 import { DiceComponent } from '../dice/dice.component';
 import { AsyncPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-game',
@@ -29,7 +30,11 @@ export class GameComponent {
   diceRoll: number | undefined = undefined;
   disableActions = false;
 
-  constructor(private store: Store<{ player: PlayerState; enemy: EnemyState }>, private router: Router) {}  // Agregar Router
+  constructor(
+    private store: Store<{ player: PlayerState; enemy: EnemyState }>,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   getBackgroundImage(level: number): string {
     if (level > 20) {
@@ -57,13 +62,37 @@ export class GameComponent {
   }
 
   checkPlayerDeath() {
-    this.player$.subscribe(player => {
+    this.player$.subscribe(async player => {
       if (player.health <= 0) {
-        this.disableActions = true;
-        this.message = 'You are dead! 💀';
         setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 4000);
+          this.disableActions = true;
+        }, 610);
+        this.message = 'You are dead! 💀';
+        const character = {
+          name: player.name,
+          level: player.level,
+          inventory: {
+            weapon: {
+              attack: player.inventory.weaponDmg,
+              name: player.inventory.weapon
+            },
+            armour: {
+              defense: player.inventory.armorDef,
+              name: player.inventory.armor
+            }
+          }
+        }
+        this.http.post('https://catacombcrawler-nestjs-production.up.railway.app/characters/create', character).subscribe({
+          next: (response) => {
+            console.log('Character created successfully', response);
+            setTimeout(() => {
+              this.router.navigate(['/leaderboard']);
+            }, 4000);
+          },
+          error: (err) => {
+            console.error('Error creating character', err);
+          }
+        });
       }
     }).unsubscribe();
   }

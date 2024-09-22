@@ -13,5 +13,9 @@ export const persuadeEnemy = createAction(
 
 export const resetEnemy = createAction(
   '[Enemy] Reset',
-  props<{ player: PlayerState }>() // Aceptamos el estado del jugador como prop
+  props<{ player: PlayerState }>()
+);
+
+export const resetEnemies = createAction(
+  '[Enemy] Reset State'
 );

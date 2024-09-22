@@ -40,3 +40,7 @@ export const updatePlayerName = createAction(
   '[Player] Update Player Name',
   props<{ name: string }>()
 );
+
+export const resetPlayer = createAction(
+  '[Player] Reset State'
+);

@@ -1,3 +1,7 @@
+<audio #backgroundMusic autoplay loop>
+  <source src="/battle-music.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
 <div class="game-container">
   <!-- Área central con narrativa y opciones -->
   <div class="game-story">
@@ -32,10 +36,21 @@
   <app-player></app-player>
 
   <!-- Componente del enemigo -->
+  
+  @if (showEnemyDamageEffect) {
+    <div class="enemy-container"></div>
+  }
   <app-enemy></app-enemy>
+
 
   <!-- Modal para elegir recompensa, visible cuando showModal es true -->
   @if (showModal) {
     <app-reward-modal (onRewardSelection)="handleRewardSelection($event)"></app-reward-modal>
+  }
+  @if (showDamageEffect) {
+    <div class="flash-damage"></div>
+  }
+  @if (showHealthEffect) {
+    <div class="flash-health"></div>
   }
 </div>

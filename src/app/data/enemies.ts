@@ -1,7 +1,7 @@
 export const enemies = [
   {
     name: 'Skeleton Warrior',
-    enemyImg: './enemies/spooky-skeleton.gif',
+    enemyImg: './enemies/spooky-skeleton.webp',
     health: 25,
     maxHealth: 25,
     persuasion: 0,

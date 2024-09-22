@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { damageEnemy, persuadeEnemy, resetEnemy } from '../actions/enemy.actions';
-import { enemies } from '../../data/enemies';  // Importamos la tabla de enemigos
-import { PlayerState } from '../reducers/player.reducer'; // Importamos el estado del jugador para acceder a su nivel
+import { damageEnemy, persuadeEnemy, resetEnemies, resetEnemy } from '../actions/enemy.actions';
+import { enemies } from '../../data/enemies';
+import { PlayerState } from '../reducers/player.reducer';
 
 export interface EnemyState {
   name: string;
@@ -11,18 +11,20 @@ export interface EnemyState {
   persuasion: number;
   attack: number;
   defense: number;
-  enemyType: string; 
+  enemyType: string;
+  lastEnemyName?: string;
 }
 
 const initialEnemyState: EnemyState = {
   name: 'Skeleton Warrior',
-  enemyImg: './enemies/spooky-skeleton.gif',
+  enemyImg: './enemies/spooky-skeleton.webp',
   health: 25,
   maxHealth: 25,
   persuasion: 0,
   attack: 9,
   defense: 3,
-  enemyType: 'skeleton' 
+  enemyType: 'skeleton',
+  lastEnemyName: undefined
 };
 
 export const enemyReducer = createReducer(
@@ -35,22 +37,31 @@ export const enemyReducer = createReducer(
     ...state,
     persuasion: Math.min(100, state.persuasion + persuasion),
   })),
-  // Nuevo: Actualizar el enemigo basado en el nivel del jugador
+  
   on(resetEnemy, (state, { player }: { player: PlayerState }) => {
-    // Find a random enemy based on player's level
-    const possibleEnemies = enemies.filter(
+    let possibleEnemies = enemies.filter(
       (enemy) => player.level >= enemy.levelRange[0] && player.level <= enemy.levelRange[1]
     );
-    
-    // Pick a random enemy from the filtered list
+
+    possibleEnemies = possibleEnemies.filter(
+      (enemy) => enemy.name !== state.lastEnemyName
+    );
+
+    if (possibleEnemies.length === 0) {
+      possibleEnemies = enemies.filter(
+        (enemy) => player.level >= enemy.levelRange[0] && player.level <= enemy.levelRange[1]
+      );
+    }
+
     const randomEnemy = possibleEnemies[Math.floor(Math.random() * possibleEnemies.length)];
 
-    // Return the new enemy state
     return {
       ...state,
-      ...randomEnemy, // Update the enemy with the new selected enemy
-      health: randomEnemy.maxHealth, // Reset the health to maxHealth
-      persuasion: 0 // Reset persuasion if needed
+      ...randomEnemy,
+      health: randomEnemy.maxHealth,
+      persuasion: 0,
+      lastEnemyName: randomEnemy.name
     };
-  })
+  }),
+  on(resetEnemies, () => initialEnemyState)
 );

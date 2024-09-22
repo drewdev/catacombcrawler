@@ -59,7 +59,7 @@ export class RewardModalComponent implements OnInit {
         return reward;
       }
     }
-    return rewards[0]; // Fallback in case no reward is selected
+    return rewards[0];
   }
 
   getDropTableByEnemyType(type: string) {
@@ -75,9 +75,8 @@ export class RewardModalComponent implements OnInit {
         return specterDropTable;
       case 'dragon':
         return dragonDropTable;
-      // Add other case statements for vampires, spectres, dragons, etc.
       default:
-        return skeletonDropTable;  // Default to skeleton if no type is matched
+        return skeletonDropTable;
     }
   }
 
@@ -93,7 +92,7 @@ export class RewardModalComponent implements OnInit {
     this.enemy$.subscribe((enemy) => {
       enemyType = enemy.enemyType;
     })
-    const dropTable = this.getDropTableByEnemyType(enemyType);  // Fetch drop table based on enemy type
+    const dropTable = this.getDropTableByEnemyType(enemyType);
     const rewardType = this.getRewardType();
     const reward = this.getRandomReward(dropTable, rewardType);
     this.showReward(reward);

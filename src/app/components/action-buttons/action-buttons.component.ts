@@ -39,9 +39,6 @@ export class ActionButtonsComponent {
   onEscape() {
     this.rollDice();
     if (this.diceRoll === 6) {
-      // Handle successful escape
-    } else {
-      // Handle failed escape
     }
   }
 }

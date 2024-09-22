@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { damageEnemy, persuadeEnemy, resetEnemy } from '../../state/actions/enemy.actions';
@@ -21,19 +21,25 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./game.component.scss'],
   imports: [PlayerComponent, EnemyComponent, ActionButtonsComponent, RewardModalComponent, TextBoxComponent, DiceComponent, AsyncPipe],
 })
-export class GameComponent {
+export class GameComponent implements AfterViewInit {
   player$ = this.store.select('player');
   enemy$ = this.store.select('enemy');
   message: string = 'You encounter an Enemy in the dungeon! What will you do?';
   showModal = false;
+  showDamageEffect = false;
+  showEnemyDamageEffect = false;
+  showHealthEffect = false;
   @ViewChild(DiceComponent) diceComponent!: DiceComponent;
+  @ViewChild('backgroundMusic') backgroundMusic!: ElementRef<HTMLAudioElement>;
+
   diceRoll: number | undefined = undefined;
   disableActions = false;
 
   constructor(
     private store: Store<{ player: PlayerState; enemy: EnemyState }>,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private renderer: Renderer2
   ) {}
 
   getBackgroundImage(level: number): string {
@@ -59,6 +65,35 @@ export class GameComponent {
       this.disableActions = false;
     }, 600);
     return result;
+  }
+  ngAfterViewInit() {
+    this.playBackgroundMusic();
+  }
+
+  playBackgroundMusic() {
+    this.backgroundMusic.nativeElement.play();
+  }
+
+  pauseBackgroundMusic() {
+    this.backgroundMusic.nativeElement.pause();
+  }
+  applyDamageEffect(target: string) {
+    if (target === 'player') {
+      this.showDamageEffect = true;
+      setTimeout(() => {
+        this.showDamageEffect = false;
+      }, 500);
+    } else if (target === 'enemy') {
+      this.showEnemyDamageEffect = true;
+      setTimeout(() => {
+        this.showEnemyDamageEffect = false;
+      }, 500);
+    } else {
+      this.showHealthEffect = true;
+      setTimeout(() => {
+        this.showHealthEffect = false;
+      }, 500);
+    }
   }
 
   checkPlayerDeath() {
@@ -123,13 +158,15 @@ export class GameComponent {
       } else {
         if (damage === 1) {
           this.message = `The ${ enemyName } feels offended by your overconfidence! He is furious and delivers a devastating attack! You missed ${ enemyDmg } hp`;
-          this.store.dispatch(damagePlayer({ damage }));
+          this.applyDamageEffect('player');
+          this.store.dispatch(damagePlayer({ damage: enemyDmg }));
         } else {
           this.message = `Persuasion failed. The ${ enemyName } is enraged and attacks! You missed ${ damage * 5 } hp`;
-          this.store.dispatch(damagePlayer({ damage }));
+          this.applyDamageEffect('player');
+          this.store.dispatch(damagePlayer({ damage: damage * 5 }));
         }
       }
-      this.checkPlayerDeath();  // Verificar si el jugador ha muerto
+      this.checkPlayerDeath();
     }
   }
 
@@ -149,10 +186,11 @@ export class GameComponent {
     if (result > 3) {
       const damage = result === 6 ? Math.floor(attack * 2.5 - enemyDef) : attack + result - enemyDef;
       this.store.dispatch(damageEnemy({ damage }));
+      this.applyDamageEffect('enemy');
       this.message = result === 6 ? `Critical Hit! You dealt ${damage} damage to the ${ enemyName }!` : `You dealt ${damage} damage to the ${ enemyName }!`;
       this.enemy$.subscribe((enemy) => {
         if (enemy.health <= 0) {
-          this.message = `You have defeated the ${ enemyName } Warrior!`;
+          this.message = `You have defeated the ${ enemyName }`;
           this.showModal = true;
         }
       }).unsubscribe();
@@ -167,9 +205,9 @@ export class GameComponent {
         this.message = damage > 0 ? `Your attack missed! The ${ enemyName } counters! You missed ${ damage } hp` :
         `Your attack missed! The ${ enemyName } counters! But your armor is too powerful! The Enemy's attack bounces off.`;
       }
-      
+      this.applyDamageEffect('player');
       this.store.dispatch(damagePlayer({ damage }));
-      this.checkPlayerDeath();  // Verificar si el jugador ha muerto
+      this.checkPlayerDeath();  
     }
   }
 
@@ -193,21 +231,24 @@ export class GameComponent {
       if (result > 5) {
         restore = Math.floor(Math.random() * (15 - 20 + 1) + 10 + result * 2 + level * 1.5); 
         this.message = `Critical! It restores ${ restore } hp!`;
+        this.applyDamageEffect('heal');
       } else if (result < 3) {
         restore = Math.floor(Math.random() * (15 - 20 + 1) + 10 + result + level * 1.5); 
         this.message = `It restores ${ restore } hp, but the enemy takes advantage of your lowered guard and attacks! 
         You lose ${ Math.floor(enemyDamage - def / 2) } hp! `;
+        this.applyDamageEffect('player');
       } else {
         restore = Math.floor(Math.random() * (15 - 20 + 1) + 10 + result + level * 1.5); 
+        this.applyDamageEffect('heal');
         this.message = `It restores ${ restore } hp!`;
       }
       this.store.dispatch(damagePlayer({ damage: -restore }));
-      this.checkPlayerDeath();  // Verificar si el jugador ha muerto
+      this.checkPlayerDeath();  
     }
   }
 
   async onEscape() {
-    this.message = 'You try to escape from the Skeleton Warrior...';
+    this.message = 'You try to escape from the Enemy...';
     const result = await this.rollDice();
     if (result === 6) {
       this.message = 'You successfully escaped!';
@@ -223,8 +264,9 @@ export class GameComponent {
       this.message = result === 1 ? 
         `You tripped while trying to escape! The ${ enemyName } deals you a fatal blow! You lose ${ damage } hp!`
         : `Escape failed! The ${ enemyName } attacks you! You lose ${ damage } hp!`;
+      this.applyDamageEffect('player');
       this.store.dispatch(damagePlayer({ damage }));
-      this.checkPlayerDeath();  // Verificar si el jugador ha muerto
+      this.checkPlayerDeath();  
     }
   }
 

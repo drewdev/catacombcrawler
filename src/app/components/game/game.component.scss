@@ -47,3 +47,78 @@
 .dice-result {
   margin-top: 1em;
 }
+
+@keyframes damage-flash {
+  0% {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(255, 0, 0, 0);
+  }
+}
+@keyframes damage-health {
+  0% {
+    background-color: rgba(0, 180, 9, 0.5);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(255, 0, 0, 0);
+  }
+}
+.enemy-container {
+  width: 15%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+  animation: damage-flash 0.5s ease-in-out;
+  @media screen and (max-width: 768px) {
+    width: 35%;
+    height: 34%;
+  }
+  @media screen and (max-width: 480px) {
+    top: 50%;
+    width: 50%;
+    height: 35%;
+    h3 {
+      font-size: 1em;
+    }
+    p {
+      font-size: .7em;
+    }
+  }
+}
+.flash-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.flash-damage,
+.flash-health {
+  @extend .flash-base;
+}
+
+.flash-damage {
+  animation: damage-flash 0.5s ease-in-out;
+}
+
+.flash-health {
+  animation: damage-health 0.5s ease-in-out;
+}

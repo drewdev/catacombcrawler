@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { damagePlayer, healPlayer, updateArmor, updateInventory, updatePlayerName, updatePotion, updateReward, updateWeapon } from '../actions/player.actions';
+import { damagePlayer, healPlayer, resetPlayer, updateArmor, updateInventory, updatePlayerName, updatePotion, updateReward, updateWeapon } from '../actions/player.actions';
 import { reward } from '../../data/drop-tables';
 
 export interface PlayerState {
@@ -83,4 +83,5 @@ export const playerReducer = createReducer(
     ...state,
     name
   })),
+  on(resetPlayer, () => initialPlayerState)
 );

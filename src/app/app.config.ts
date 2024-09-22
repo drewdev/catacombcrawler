@@ -22,9 +22,9 @@ export const appConfig: ApplicationConfig = {
     provideStore({ player: playerReducer, enemy: enemyReducer }),
     provideEffects(),
     provideStoreDevtools({
-      maxAge: 25, // Mantiene los últimos 25 estados
-      logOnly: !isDevMode(), // Solo lectura en producción
-      autoPause: true, // Pausa cuando la pestaña del navegador no está activa
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
     }),
   ]
 };

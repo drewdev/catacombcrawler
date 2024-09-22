@@ -8,6 +8,5 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'transition', component: TransitionComponent },
   { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'game', component: GameComponent },
-  // Otras rutas...
+  { path: 'game', component: GameComponent }
 ];
